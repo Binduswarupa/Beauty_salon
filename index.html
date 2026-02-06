@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Up Salon | Premium Beauty Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --glass: rgba(255, 255, 255, 0.05);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Luxury Navigation --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(18,18,18,1)), 
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            color: #bbb;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+            border: 1px solid var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .btn-outline {
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* --- Scroll Animation --- */
+        .fade-in {
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="fade-in">
+        <h1>Elevate Your Beauty</h1>
+        <p>Experience the art of rejuvenation in the most sophisticated salon in Vijayawada.</p>
+        <div class="btn-group">
+            <a href="/services" class="btn btn-gold">Our Services</a>
+            <a href="/register" class="btn btn-outline">Join Membership</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 GLOW UP SALON. CRAFTED FOR ELEGANCE.</p>
+</footer>
+
+</body>
+</html>

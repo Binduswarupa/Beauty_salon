@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- Admin Navigation --- */
+        header {
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* --- Dashboard Layout --- */
+        .admin-container {
+            padding: 3rem 10%;
+        }
+
+        .admin-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .admin-container p {
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        /* --- Appointment Table Card --- */
+        .admin-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            overflow-x: auto; /* Handles small screens */
+        }
+
+        .admin-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #fff;
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            text-align: left;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 15px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        td {
+            padding: 15px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #ccc;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+        }
+
+        /* Status Badge Styling */
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/admin-dashboard" class="logo">Glow Up Admin</a>
+    <nav>
+        <a href="/admin-dashboard" class="active">Dashboard</a>
+        <a href="/add-beautician">Add Beautician</a>
+        <a href="/services">Services</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section class="admin-container">
+    <h1>Admin Dashboard</h1>
+    <p>Manage appointments, beauticians, and salon operations</p>
+
+    <div class="admin-card">
+        <h3>All Appointments</h3>
+
+        {% if appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>User Email</th>
+                    <th>Service</th>
+                    <th>Beautician</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in appointments %}
+                <tr>
+                    <td>{{ a.user }}</td>
+                    <td>{{ a.service }}</td>
+                    <td>{{ a.beautician }}</td>
+                    <td>{{ a.date }}</td>
+                    <td>{{ a.time }}</td>
+                    <td><span class="status-pill">{{ a.status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p style="text-align: center; padding: 20px;">No appointments found.</p>
+        {% endif %}
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 GLOW UP SALON • ADMIN PANEL</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        /* --- Auth Wrapper --- */
+        .auth-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #121212 100%);
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .auth-card p {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* --- Forms --- */
+        .flash-msg {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 15px;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .auth-link a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #000;
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/login" class="active">Login</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h1>Welcome Back</h1>
+        <p>Enter your details to access your account</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-msg">
+              {{ messages[0] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/login">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+        </form>
+
+        <p class="auth-link">
+            Don’t have an account? <a href="/register">Create one</a>
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 GLOW UP SALON. ALL RIGHTS RESERVED.</p>
+</footer>
+
+</body>
+</html>

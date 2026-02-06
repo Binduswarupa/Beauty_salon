@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        /* --- Profile Container --- */
+        .profile-container {
+            padding: 4rem 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* --- Profile Cards --- */
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .profile-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .profile-details p {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #ccc;
+        }
+
+        .profile-details strong {
+            color: #fff;
+            margin-right: 10px;
+            font-weight: 600;
+        }
+
+        /* --- Appointment History Table --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        td {
+            padding: 15px;
+            color: #ddd;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* --- Action Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #000;
+            color: #444;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/my-appointments">My Appointments</a>
+        <a href="/profile" class="active">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section class="profile-container">
+    <h1>Member Profile</h1>
+
+    <div class="profile-card">
+        <h3>Personal Information</h3>
+        <div class="profile-details">
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Member Since:</strong> {{ user.created_at }}</p>
+        </div>
+    </div>
+
+    <div class="profile-card">
+        <h3>Appointment History</h3>
+        {% if appointments %}
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Beautician</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in appointments %}
+                    <tr>
+                        <td>{{ a.beautician }}</td>
+                        <td>{{ a.date }}</td>
+                        <td>{{ a.time }}</td>
+                        <td style="color: var(--gold);">{{ a.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p style="text-align: center; padding: 20px; color: #777;">You haven't booked any experiences yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="profile-card">
+        <h3>Account Settings</h3>
+        <p style="margin-bottom: 20px; color: #888;">Keep your account secure by updating your credentials regularly.</p>
+        <a href="/change-password" class="btn">Change Password</a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 GLOW UP SALON. ALL RIGHTS RESERVED.</p>
+</footer>
+
+</body>
+</html>

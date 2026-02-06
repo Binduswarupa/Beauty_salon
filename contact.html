@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us | Glow Up Salon</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <h2 class="logo">Glow Up Salon</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/appointments">Appointments</a>
+        <a href="/contact" class="active">Contact</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<!-- Contact Section -->
+<section class="contact-container">
+    <h1>Contact Us</h1>
+    <p>Have a question or want to book a service? Reach out to us!</p>
+
+    <div class="contact-box">
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <h3>Salon Details</h3>
+            <p><strong>📍 Address:</strong> Vijayawada, Andhra Pradesh</p>
+            <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+            <p><strong>📧 Email:</strong> glowupsalon@gmail.com</p>
+            <p><strong>⏰ Working Hours:</strong> 9:00 AM – 8:00 PM</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h3>Send Us a Message</h3>
+            <form method="POST" action="/contact">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 Glow Up Salon. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

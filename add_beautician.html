@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Beautician | Admin | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Admin Navigation --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* --- Main Content --- */
+        .admin-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .admin-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 45px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* --- Form Elements --- */
+        .flash-msg {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+            appearance: none; /* Removes default arrow for select */
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px;
+        }
+
+        option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/admin-dashboard" class="logo">Glow Up Admin</a>
+    <nav>
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/add-beautician" class="active">Add Beautician</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="admin-wrapper">
+    <div class="admin-card">
+        <h1>Add Beautician</h1>
+        <p>Register professional staff members to the roster</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-msg">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/add-beautician">
+            <input type="text" name="name" placeholder="Full Name" required>
+
+            <select name="skill" required>
+                <option value="" disabled selected>-- Select Specialization --</option>
+                <option value="Hair Specialist">Hair Specialist</option>
+                <option value="Skin Expert">Skin Expert</option>
+                <option value="Makeup Artist">Makeup Artist</option>
+                <option value="Spa Therapist">Spa Therapist</option>
+            </select>
+
+            <button type="submit">Confirm Registration</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 GLOW UP SALON • ADMIN MANAGEMENT SYSTEM</p>
+</footer>
+
+</body>
+</html>

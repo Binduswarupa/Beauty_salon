@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Luxury Header --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        /* --- Booking Section --- */
+        .appointment-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #121212 100%);
+        }
+
+        .appointment-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Form Elements --- */
+        .flash-msg {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Customizing date/time picker icons for dark mode */
+        input::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(100%) saturate(500%) hue-rotate(10deg);
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            background: #000;
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/appointments" class="active">Appointments</a>
+        <a href="/my-appointments">My Appointments</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="appointment-wrapper">
+    <div class="appointment-card">
+        <h1>Book Experience</h1>
+        <p class="subtitle">Secure your moment of luxury and relaxation</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-msg">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/book">
+            <label>Choose Service</label>
+            <select name="service" required>
+                <option value="" disabled selected>Select a treatment</option>
+                <option value="Hair Styling">Hair Styling</option>
+                <option value="Facial & Skin Care">Facial & Skin Care</option>
+                <option value="Makeup">Makeup</option>
+                <option value="Spa & Relaxation">Spa & Relaxation</option>
+            </select>
+
+            <label>Select Beautician</label>
+            <select name="beautician" required>
+                <option value="" disabled selected>Choose your specialist</option>
+                <option value="Hair Specialist">Hair Specialist</option>
+                <option value="Skin Expert">Skin Expert</option>
+                <option value="Makeup Artist">Makeup Artist</option>
+                <option value="Spa Therapist">Spa Therapist</option>
+            </select>
+
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <label>Date</label>
+                    <input type="date" name="date" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>Time</label>
+                    <input type="time" name="time" required>
+                </div>
+            </div>
+
+            <button type="submit">Confirm Appointment</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 GLOW UP SALON. ALL RIGHTS RESERVED.</p>
+</footer>
+
+</body>
+</html>

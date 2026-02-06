@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- Luxury Header --- */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active { color: var(--gold); }
+
+        /* --- Table Container --- */
+        .container { padding: 4rem 10%; max-width: 1200px; margin: 0 auto; }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .subtitle { color: #888; margin-bottom: 40px; font-weight: 300; }
+
+        .appointment-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow-x: auto;
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+
+        th {
+            text-align: left;
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 20px 15px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        td { padding: 20px 15px; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+
+        tr:hover td { background: rgba(255, 255, 255, 0.02); color: #fff; }
+
+        /* --- Status and Buttons --- */
+        .status-pill {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+        }
+
+        .btn-cancel {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #ff4d4d;
+            color: #ff4d4d;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-cancel:hover {
+            background: #ff4d4d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+        }
+
+        footer { text-align: center; padding: 3rem; color: #444; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/my-appointments" class="active">My Appointments</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section class="container">
+    <h1>Your Appointments</h1>
+    <p class="subtitle">Review and manage your upcoming beauty transformations.</p>
+
+    <div class="appointment-card">
+        {% if appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Service Type</th>
+                    <th>Beauty Specialist</th>
+                    <th>Scheduled Date</th>
+                    <th>Time Slot</th>
+                    <th>Status</th>
+                    <th>Management</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in appointments %}
+                <tr>
+                    <td>{{ a.service }}</td>
+                    <td>{{ a.beautician }}</td>
+                    <td>{{ a.date }}</td>
+                    <td>{{ a.time }}</td>
+                    <td><span class="status-pill">{{ a.status }}</span></td>
+                    <td>
+                        <a href="/cancel/{{ a.appointment_id }}" class="btn-cancel" onclick="return confirm('Are you sure you want to cancel this booking?')">Cancel Booking</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div style="text-align: center; padding: 60px;">
+            <p style="color: #666; margin-bottom: 20px;">You haven't scheduled any experiences yet.</p>
+            <a href="/services" style="color: var(--gold); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--gold);">Book Your First Treatment →</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 GLOW UP SALON. CRAFTED FOR ELEGANCE & COMFORT.</p>
+</footer>
+
+</body>
+</html>

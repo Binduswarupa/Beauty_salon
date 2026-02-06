@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Glow Up Salon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.9);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; color: var(--gold);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #fff; text-decoration: none; margin-left: 1.5rem;
+            font-size: 0.85rem; letter-spacing: 1px; transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active { color: var(--gold); }
+
+        .services-section { padding: 4rem 10%; text-align: center; }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem; color: var(--gold); margin-bottom: 10px;
+        }
+
+        .intro { color: #888; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
+
+        .service-card p { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
+
+        .price { font-size: 1.8rem; color: var(--gold); font-weight: 600; margin-bottom: 25px; }
+
+        input {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px; color: #fff; font-size: 0.8rem;
+        }
+
+        button {
+            width: 100%; padding: 12px; background: var(--gold);
+            color: #000; border: none; border-radius: 8px;
+            font-weight: 600; text-transform: uppercase; cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button:hover { background: #fff; }
+
+        footer { text-align: center; padding: 3rem; background: #000; color: #444; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Glow Up</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/services" class="active">Services</a>
+        <a href="/my-appointments">My Appointments</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section class="services-section">
+    <h1>Our Beauty Services</h1>
+    <p class="intro">Curated treatments designed to enhance your natural radiance and provide ultimate relaxation.</p>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div>
+                <h3>Hair Styling</h3>
+                <p>Precision haircuts, professional styling, and vibrant coloring treatments.</p>
+                <p class="price">₹999</p>
+            </div>
+            <form method="POST" action="/book">
+                <input type="hidden" name="service" value="Hair Styling">
+                <input type="hidden" name="beautician" value="Hair Specialist">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="service-card">
+            <div>
+                <h3>Facial & Skin Care</h3>
+                <p>Advanced skin therapy and luxury facials for a healthy, glowing complexion.</p>
+                <p class="price">₹1299</p>
+            </div>
+            <form method="POST" action="/book">
+                <input type="hidden" name="service" value="Facial & Skin Care">
+                <input type="hidden" name="beautician" value="Skin Expert">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="service-card">
+            <div>
+                <h3>Makeup</h3>
+                <p>Professional makeup services for parties, weddings, and special events.</p>
+                <p class="price">₹1999</p>
+            </div>
+            <form method="POST" action="/book">
+                <input type="hidden" name="service" value="Makeup">
+                <input type="hidden" name="beautician" value="Makeup Artist">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="service-card">
+            <div>
+                <h3>Spa & Relaxation</h3>
+                <p>Rejuvenate your body and mind with our signature massage and spa therapies.</p>
+                <p class="price">₹2499</p>
+            </div>
+            <form method="POST" action="/book">
+                <input type="hidden" name="service" value="Spa & Relaxation">
+                <input type="hidden" name="beautician" value="Spa Therapist">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer><p>© 2026 GLOW UP SALON. ALL RIGHTS RESERVED.</p></footer>
+
+</body>
+</html>
